@@ -97,12 +97,11 @@ public class Login extends javax.swing.JFrame {
         System.out.println(username + " " + password);
         User user = new User().login(username, password);
         if (user != null) {
-            JOptionPane.showMessageDialog(this, "Berhasil : " + user.getUsername());
             Session.session = user;
             new Home().setVisible(true);
             this.dispose();
         }else {
-            JOptionPane.showMessageDialog(this, "Gagal : ");
+            JOptionPane.showMessageDialog(this, "Gagal : data salah");
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 

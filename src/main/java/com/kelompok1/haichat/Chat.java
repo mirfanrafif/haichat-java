@@ -5,39 +5,40 @@
  */
 package com.kelompok1.haichat;
 
+import java.io.Serializable;
+
 /**
  *
  * @author mirfa
  */
-public class Chat {
-    private String usernamePengirim;
-    private String usernamePenerima;
+public class Chat implements Serializable{
+    private User pengirim;
+    private User penerima;
     private String isichat;
 
-    public Chat(String usernamePengirim, String usernamePenerima, String isichat) {
-        this.usernamePengirim = usernamePengirim;
-        this.usernamePenerima = usernamePenerima;
+    public Chat(User pengirim, User penerima, String isichat) {
+        this.pengirim = pengirim;
+        this.penerima = penerima;
         this.isichat = isichat;
     }
 
     public Chat() {
-        
     }
 
-    public String getUsernamePengirim() {
-        return usernamePengirim;
+    public User getPengirim() {
+        return pengirim;
     }
 
-    public void setUsernamePengirim(String usernamePengirim) {
-        this.usernamePengirim = usernamePengirim;
+    public void setPengirim(User pengirim) {
+        this.pengirim = pengirim;
     }
 
-    public String getUsernamePenerima() {
-        return usernamePenerima;
+    public User getPenerima() {
+        return penerima;
     }
 
-    public void setUsernamePenerima(String usernamePenerima) {
-        this.usernamePenerima = usernamePenerima;
+    public void setPenerima(User penerima) {
+        this.penerima = penerima;
     }
 
     public String getIsichat() {
@@ -47,6 +48,7 @@ public class Chat {
     public void setIsichat(String isichat) {
         this.isichat = isichat;
     }
+
     
     
 }

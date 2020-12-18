@@ -5,6 +5,7 @@
  */
 package com.kelompok1.haichat;
 
+import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -15,7 +16,7 @@ import java.util.List;
  *
  * @author mirfa
  */
-public class User {
+public class User implements Serializable{
     private int id;
     private String nama;
     private String username;

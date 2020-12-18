@@ -8,6 +8,7 @@ package com.kelompok1.haichat.ui;
 import com.kelompok1.haichat.Kontak;
 import com.kelompok1.haichat.Session;
 import com.kelompok1.haichat.User;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 /**
@@ -35,6 +36,7 @@ public class TambahTeman extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         usernameField = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -47,14 +49,24 @@ public class TambahTeman extends javax.swing.JFrame {
             }
         });
 
+        jButton2.setText("Kembali");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButton2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton1))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jLabel1)
                         .addComponent(usernameField, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -68,7 +80,9 @@ public class TambahTeman extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(usernameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(jButton2))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -79,16 +93,25 @@ public class TambahTeman extends javax.swing.JFrame {
         String username = usernameField.getText();
         User user = new User().cariUser(username);
         if (user == null) {
-            JOptionPane.showMessageDialog(this, "Username tidak ada");
-        }else {
-            Kontak kontak = new Kontak();
-            kontak.setUser1(Session.session);
-            kontak.setUser2(user);
-            kontak.save();
-            new Home().setVisible(true);
-            this.dispose();
+            JOptionPane.showMessageDialog(this, "Isi tulisannya dong");
+        } else {
+            if (new Kontak().cariTeman(Session.session.getId(), username)) {
+                JOptionPane.showMessageDialog(this, "Sudah berteman");
+            } else {
+                Kontak kontak = new Kontak();
+                kontak.setUser1(Session.session);
+                kontak.setUser2(user);
+                kontak.save();
+                new Home().setVisible(true);
+                this.dispose();
+            }
         }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        new Home().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -127,6 +150,7 @@ public class TambahTeman extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JTextField usernameField;
     // End of variables declaration//GEN-END:variables
